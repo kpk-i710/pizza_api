@@ -1,6 +1,6 @@
 
 from database  import engine, Base
-from sqlalchemy import Column, Integer, String, Text, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Enum as EnumType
 from sqlalchemy.orm import relationship
 from sqlalchemy_utils.types import ChoiceType
 
@@ -19,23 +19,23 @@ class User(Base):
 
 class Order(Base):
     ORDER_STATUSES = (
-        ('PENDING', 'pending'),
-        ('IN-TRANSIT', 'in-transit'),
-        ('DELIVERED', 'delivered')
+        'PENDING',
+        'IN-TRANSIT',
+        'DELIVERED'
     )
 
     PIZZA_SIZES = (
-        ('SMALL', 'small'),
-        ('MEDIUM', 'medium'),
-        ('LARGE', 'large'),
-        ('EXTRA-LARGE', 'extra-large')
+        'SMALL',
+        'MEDIUM',
+        'LARGE',
+        'EXTRA-LARGE'
     )
 
     __tablename__ = 'orders'
     id = Column(Integer, primary_key=True)
     quantity = Column(Integer, nullable=False)
-    order_status = Column(ChoiceType(choices=ORDER_STATUSES), default="PENDING")
-    pizza_size = Column(ChoiceType(choices=PIZZA_SIZES), default='SMALL')
+    order_status = Column(EnumType(*ORDER_STATUSES, name='order_status_enum'), default="PENDING")
+    pizza_size = Column(EnumType(*PIZZA_SIZES, name='pizza_size_enum'), default='SMALL')
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship('User', back_populates='orders')
 

@@ -20,9 +20,9 @@ Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-
 # Пример добавления данных в таблицы
-new_user = User(username='john_doe', email='john@example.com', password='securepassword', is_staff=True, is_active=True)
+# Пример добавления данных в таблицы
+new_user = User(username='john_doe1', email='john@example.com1', password='securepassword', is_staff=True, is_active=True)
 new_order = Order(quantity=2, order_status='PENDING', pizza_size='LARGE', user=new_user)
 
 session.add(new_user)
