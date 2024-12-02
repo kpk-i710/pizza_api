@@ -5,7 +5,8 @@ auth_router = APIRouter()
 
 
 auth_router=APIRouter(
-    prefix='/auth'
+    prefix='/auth',
+    tags=['auth']
 )
 
 @auth_router.get('/')
