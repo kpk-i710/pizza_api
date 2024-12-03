@@ -8,3 +8,4 @@ passlib
 bcrypt
 sqlalchemy_utils
 mysql-connector-python
+werkzeug
