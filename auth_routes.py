@@ -37,4 +37,4 @@ async def signup(user: SignUpModel, session: AsyncSession):
     if db_email is not None:
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                              detail="User with the email already exists")
-    new_user = User(username=user.username, email=user, password = )
+    new_user = User(username=user.username, email=user.email, password = generate_password_hash(user.password))
